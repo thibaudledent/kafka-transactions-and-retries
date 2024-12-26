@@ -1,0 +1,28 @@
+spring:
+  cloud:
+    function:
+      definition: consumeMessage
+    stream:
+      kafka:
+        binder:
+          transaction:
+            transaction-id-prefix: transaction-
+          required-acks: all
+          configuration:
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+            key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        bindings:
+          consumeMessage-in-0:
+            consumer:
+              enable-dlq: true
+      bindings:
+        consumeMessage-in-0:
+          group: my-group
+          destination: my-topic
+          consumer:
+            default-retryable: false
+            max-attempts: 5
+            back-off-initial-interval: 100
+            retryable-exceptions:
+              java.lang.UnsupportedOperationException: true
+              java.lang.IllegalArgumentException: false
