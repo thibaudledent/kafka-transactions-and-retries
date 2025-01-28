@@ -19,10 +19,11 @@ spring:
         consumeMessage-in-0:
           group: my-group
           destination: my-topic
-          consumer:
-            default-retryable: false
-            max-attempts: 5
-            back-off-initial-interval: 100
-            retryable-exceptions:
-              java.lang.UnsupportedOperationException: true
-              java.lang.IllegalArgumentException: false
+#          consumer:
+##            max-attempts: 1
+#            default-retryable: false
+#            max-attempts: 5
+#            back-off-initial-interval: 100
+#            retryable-exceptions:
+#              java.lang.UnsupportedOperationException: true
+#              java.lang.IllegalArgumentException: false
